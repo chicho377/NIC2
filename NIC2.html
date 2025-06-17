@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Lectura - NIC 2 Inventarios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        /* Portada */
+        .cover-page {
+            height: 297mm;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 50%, #1B5E20 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: move 20s linear infinite;
+        }
+
+        @keyframes move {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .logo-container {
+            margin-bottom: 2rem;
+            z-index: 2;
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #4CAF50;
+            font-size: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 0 auto;
+        }
+
+        .university-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 2rem 0;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .cover-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        .student-info {
+            z-index: 2;
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .student-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .date {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Contenido */
+        .content {
+            padding: 40px;
+            page-break-before: always;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: #2E7D32;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #2E7D32;
+            margin-bottom: 1rem;
+            border-left: 5px solid #4CAF50;
+            padding-left: 1rem;
+        }
+
+        .subsection-title {
+            font-size: 1.4rem;
+            color: #4CAF50;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: bold;
+        }
+
+        .text-content {
+            text-align: justify;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #E8F5E8, #F1F8E9);
+            border-left: 4px solid #4CAF50;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .key-points {
+            background: #F9F9F9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid #E0E0E0;
+        }
+
+        .key-points ul {
+            margin-left: 2rem;
+        }
+
+        .key-points li {
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .conclusion-box {
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background: #F5F5F5;
+            color: #666;
+            border-top: 1px solid #E0E0E0;
+        }
+
+        @media print {
+            .container {
+                box-shadow: none;
+            }
+            
+            .cover-page {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Portada -->
+        <div class="cover-page">
+            <div class="logo-container">
+                <div class="logo">UTC</div>
+            </div>
+            <div class="university-name">Universidad Tecnológica Costarricense</div>
+            <h1 class="cover-title">INFORME DE LECTURA</h1>
+            <h2 class="cover-subtitle">Norma Internacional de Contabilidad 2<br>Inventarios (NIC 2)</h2>
+            <div class="student-info">
+                <div class="student-name">Fabricio Mora Gómez</div>
+                <div class="date">Junio 2025</div>
+            </div>
+        </div>
+
+        <!-- Contenido del Informe -->
+        <div class="content">
+            <h1 class="page-title">INFORME DE LECTURA - NIC 2 INVENTARIOS</h1>
+
+            <div class="section">
+                <h2 class="section-title">1. INTRODUCCIÓN</h2>
+                <p class="text-content">
+                    La Norma Internacional de Contabilidad 2 (NIC 2) sobre Inventarios constituye uno de los pilares fundamentales en el marco normativo contable internacional. Esta norma, adoptada por el Consejo de Normas Internacionales de Contabilidad (IASB) en abril de 2001 y revisada en diciembre de 2003, establece los lineamientos específicos para el tratamiento contable de los inventarios en las organizaciones.
+                </p>
+                <p class="text-content">
+                    El presente informe tiene como objetivo analizar de manera integral los aspectos más relevantes de la NIC 2, examinando su alcance, definiciones fundamentales, métodos de medición, y las implicaciones prácticas de su aplicación en el contexto empresarial actual.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">2. OBJETIVO Y ALCANCE DE LA NORMA</h2>
+                
+                <div class="highlight-box">
+                    <strong>Objetivo Principal:</strong> Prescribir el tratamiento contable para los inventarios, determinando el monto del costo a ser reconocido como activo y llevado adelante hasta que los ingresos relacionados sean reconocidos.
+                </div>
+
+                <h3 class="subsection-title">2.1 Alcance de Aplicación</h3>
+                <p class="text-content">
+                    La NIC 2 se aplica a todos los inventarios, con excepción de instrumentos financieros y activos biológicos relacionados con la actividad agrícola. Es importante destacar que la norma no se aplica a la medición de inventarios mantenidos por productores de productos agrícolas y forestales cuando estos se miden al valor neto realizable, ni a los inventarios de intermediarios-comerciantes de materias primas que se miden al valor razonable menos costos de venta.
+                </p>
+
+                <div class="key-points">
+                    <strong>Exclusiones específicas:</strong>
+                    <ul>
+                        <li>Instrumentos financieros (ver NIC 32 y NIIF 9)</li>
+                        <li>Activos biológicos relacionados con actividad agrícola (ver NIC 41)</li>
+                        <li>Inventarios de productores agrícolas medidos al valor neto realizable</li>
+                        <li>Inventarios de intermediarios-comerciantes medidos al valor razonable</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">3. DEFINICIONES FUNDAMENTALES</h2>
+
+                <h3 class="subsection-title">3.1 Concepto de Inventarios</h3>
+                <p class="text-content">
+                    Según la NIC 2, los inventarios son activos que se mantienen para ser vendidos en el curso ordinario del negocio, están en proceso de producción con vistas a esa venta, o existen en forma de materiales o suministros para ser consumidos en el proceso de producción o en la prestación de servicios.
+                </p>
+
+                <h3 class="subsection-title">3.2 Valor Neto Realizable</h3>
+                <p class="text-content">
+                    El valor neto realizable representa el precio estimado de venta en el curso ordinario del negocio, menos los costos estimados de terminación y los costos estimados necesarios para llevar a cabo la venta. Esta definición es crucial para la aplicación del principio de medición al menor entre el costo y el valor neto realizable.
+                </p>
+
+                <div class="highlight-box">
+                    <strong>Diferencia clave:</strong> El valor neto realizable es específico de la entidad, mientras que el valor razonable refleja el precio en una transacción ordenada entre participantes del mercado. El valor neto realizable para inventarios puede no ser igual al valor razonable menos los costos de venta.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">4. MEDICIÓN DE INVENTARIOS</h2>
+
+                <h3 class="subsection-title">4.1 Principio Fundamental</h3>
+                <p class="text-content">
+                    Los inventarios deben medirse al menor entre el costo y el valor neto realizable. Este principio conservador asegura que los activos no se presenten por importes superiores a los que se espera obtener por su venta o uso.
+                </p>
+
+                <h3 class="subsection-title">4.2 Componentes del Costo</h3>
+                <p class="text-content">
+                    El costo de los inventarios comprende todos los costos de compra, costos de conversión y otros costos incurridos para dar a los inventarios su condición y ubicación actuales.
+                </p>
+
+                <div class="key-points">
+                    <strong>Costos de Compra incluyen:</strong>
+                    <ul>
+                        <li>Precio de compra</li>
+                        <li>Aranceles de importación y otros impuestos no recuperables</li>
+                        <li>Transporte, manipulación y otros costos directamente atribuibles</li>
+                        <li>Se deducen: descuentos comerciales, rebajas y otras partidas similares</li>
+                    </ul>
+                </div>
+
+                <div class="key-points">
+                    <strong>Costos de Conversión incluyen:</strong>
+                    <ul>
+                        <li>Costos directamente relacionados con las unidades de producción (mano de obra directa)</li>
+                        <li>Distribución sistemática de costos indirectos fijos y variables de producción</li>
+                        <li>Costos indirectos fijos: depreciación, mantenimiento de instalaciones, gestión y administración de fábrica</li>
+                        <li>Costos indirectos variables: materiales indirectos, mano de obra indirecta</li>
+                    </ul>
+                </div>
+
+                <h3 class="subsection-title">4.3 Costos Excluidos</h3>
+                <p class="text-content">
+                    La norma es específica sobre qué costos deben excluirse del costo de inventarios y reconocerse como gastos en el período en que se incurren:
+                </p>
+
+                <div class="key-points">
+                    <ul>
+                        <li>Cantidades anormales de desperdicio de materiales, mano de obra u otros costos de producción</li>
+                        <li>Costos de almacenamiento (salvo que sean necesarios en el proceso productivo)</li>
+                        <li>Costos indirectos de administración que no contribuyen a dar a los inventarios su condición y ubicación actuales</li>
+                        <li>Costos de venta</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">5. FÓRMULAS DEL COSTO</h2>
+
+                <h3 class="subsection-title">5.1 Identificación Específica</h3>
+                <p class="text-content">
+                    Para inventarios de partidas que no son habitualmente intercambiables y bienes o servicios producidos y segregados para proyectos específicos, debe utilizarse la identificación específica de sus costos individuales.
+                </p>
+
+                <h3 class="subsection-title">5.2 FIFO y Promedio Ponderado</h3>
+                <p class="text-content">
+                    Para otros inventarios, la norma permite el uso de las fórmulas FIFO (primero en entrar, primero en salir) o del promedio ponderado. La entidad debe usar la misma fórmula de costo para todos los inventarios que tengan una naturaleza y uso similares.
+                </p>
+
+                <div class="highlight-box">
+                    <strong>FIFO:</strong> Asume que las partidas de inventario que fueron compradas o producidas primero son vendidas en primer lugar. Consecuentemente, las partidas que quedan en inventario al final del período son las compradas o producidas más recientemente.
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Promedio Ponderado:</strong> El costo de cada partida se determina a partir del promedio ponderado del costo de artículos similares al principio del período y del costo de artículos similares comprados o producidos durante el período.
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">6. RECONOCIMIENTO COMO GASTO</h2>
+                <p class="text-content">
+                    Cuando los inventarios son vendidos, el importe en libros de esos inventarios debe reconocerse como gasto en el período en el que se reconocen los ingresos correspondientes. El importe de cualquier rebaja de valor de los inventarios hasta alcanzar su valor neto realizable, así como todas las pérdidas en inventarios, deben reconocerse como gasto en el período en que ocurre la rebaja o la pérdida.
+                </p>
+
+                <p class="text-content">
+                    Es importante destacar que el importe de cualquier reversión de la rebaja de valor que proceda de un incremento en el valor neto realizable se reconoce como una reducción en el valor de los inventarios que han sido reconocidos como gasto en el período en que la recuperación del valor tiene lugar.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">7. INFORMACIÓN A REVELAR</h2>
+                <p class="text-content">
+                    La NIC 2 establece requerimientos específicos de revelación que las entidades deben incluir en sus estados financieros para proporcionar información relevante sobre sus inventarios.
+                </p>
+
+                <div class="key-points">
+                    <strong>Revelaciones requeridas:</strong>
+                    <ul>
+                        <li>Las políticas contables adoptadas para medir los inventarios, incluyendo la fórmula de costo utilizada</li>
+                        <li>El importe total en libros de inventarios y los importes según la clasificación apropiada para la entidad</li>
+                        <li>El importe en libros de inventarios llevados al valor razonable menos costos de venta</li>
+                        <li>El importe de inventarios reconocido como gasto durante el período</li>
+                        <li>El importe de cualquier rebaja de valor de inventarios reconocida como gasto</li>
+                        <li>El importe de cualquier reversión de rebaja de valor reconocida como reducción del gasto</li>
+                        <li>Las circunstancias o eventos que llevaron a la reversión de rebajas de valor</li>
+                        <li>El importe en libros de inventarios pignorados como garantía de pasivos</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">8. ANÁLISIS CRÍTICO Y APLICACIÓN PRÁCTICA</h2>
+
+                <h3 class="subsection-title">8.1 Importancia en la Gestión Empresarial</h3>
+                <p class="text-content">
+                    La correcta aplicación de la NIC 2 es fundamental para la presentación fiel de la situación financiera de una empresa. Los inventarios suelen representar una porción significativa de los activos corrientes en muchas organizaciones, especialmente en sectores como manufactura, comercio al por menor y distribución.
+                </p>
+
+                <h3 class="subsection-title">8.2 Desafíos en la Implementación</h3>
+                <p class="text-content">
+                    Uno de los principales desafíos en la aplicación de la NIC 2 radica en la determinación precisa del valor neto realizable, especialmente en entornos económicos volátiles donde los precios de venta pueden fluctuar significativamente. Las empresas deben establecer procedimientos robustos para evaluar periódicamente sus inventarios y determinar si existen indicios de deterioro.
+                </p>
+
+                <h3 class="subsection-title">8.3 Impacto en los Estados Financieros</h3>
+                <p class="text-content">
+                    La elección entre las fórmulas de costo FIFO y promedio ponderado puede tener implicaciones significativas en los resultados financieros, especialmente en períodos de inflación o deflación. Las empresas deben considerar cuidadosamente cuál método refleja mejor el flujo físico real de sus inventarios y proporciona información más útil a los usuarios de los estados financieros.
+                </p>
+            </div>
+
+            <div class="conclusion-box">
+                <h2 class="section-title" style="color: white; border-left: 5px solid white;">9. CONCLUSIONES</h2>
+                <p class="text-content" style="color: white;">
+                    La NIC 2 Inventarios representa un marco normativo esencial que garantiza la uniformidad y comparabilidad en el tratamiento contable de los inventarios a nivel internacional. Su aplicación correcta no solo asegura el cumplimiento de los estándares contables internacionales, sino que también proporciona información financiera relevante y confiable para la toma de decisiones.
+                </p>
+                <p class="text-content" style="color: white;">
+                    La norma logra un equilibrio adecuado entre principios conservadores (como la medición al menor entre costo y valor neto realizable) y la flexibilidad necesaria para adaptarse a diferentes tipos de negocios y sectores industriales. Su evolución constante, evidenciada por las múltiples enmiendas realizadas por otras NIIF, demuestra la capacidad de adaptación del marco normativo a las necesidades cambiantes del entorno empresarial.
+                </p>
+                <p class="text-content" style="color: white;">
+                    Para los profesionales contables, es fundamental mantenerse actualizados con las disposiciones de la NIC 2 y sus interacciones con otras normas internacionales, asegurando así una aplicación coherente y efectiva que contribuya a la transparencia y calidad de la información financiera.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Universidad Tecnológica Costarricense | Fabricio Mora Gómez | Junio 2025</p>
+        </div>
+    </div>
+</body>
+</html>
